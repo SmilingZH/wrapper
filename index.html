@@ -124,73 +124,13 @@
             border-radius: 1vw;
         }
 
-        /* 添加横屏提示样式 */
-        .landscape-tip {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            font-size: 1.5rem;
-            z-index: 1000;
-        }
-
-        /* 添加全屏按钮样式 */
-        .fullscreen-button {
-            display: none;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1rem;
-            z-index: 1001;
-            cursor: pointer;
-        }
-
-        /* 添加全屏旋转样式 */
-        body.fullscreen {
-            transform: rotate(90deg);
-            transform-origin: center;
-            width: 100vh;
-            height: 100vw;
-            overflow: hidden;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        body.fullscreen .wrapper {
+        .wrapper {
             transform: rotate(-90deg) translate(-100vw, 0);
             transform-origin: top left;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-        }
-
-        body.fullscreen .landscape-tip,
-        body.fullscreen .fullscreen-button {
-            display: none;
-        }
-
-        @media (orientation: landscape) {
-            .landscape-tip {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .fullscreen-button {
-                display: block;
-            }
         }
     </style>
 </head>
@@ -202,13 +142,9 @@
 
         </div>
     </div>
-    <!-- 添加横屏提示元素 -->
-    <div class="landscape-tip">请将设备旋转至横屏模式</div>
-    <!-- 添加全屏按钮 -->
-    <button class="fullscreen-button" id="fullscreenButton">横屏全屏</button>
     <script>
         const itemsContainer = document.getElementById('itemsContainer');
-        for (let i = 0; i < 9; i++) { // 循环次数为12
+        for (let i = 0; i < 9; i++) { // 循环次数为9
             const item = document.createElement('div');
             item.className = 'item';
             item.tabIndex = 0;
@@ -216,43 +152,6 @@
             item.style.backgroundImage = imageUrl;
             itemsContainer.appendChild(item);
         }
-
-        // 添加检测设备方向的JavaScript代码
-        function checkOrientation() {
-            const tip = document.querySelector('.landscape-tip');
-            const fullscreenButton = document.getElementById('fullscreenButton');
-            if (window.innerWidth < window.innerHeight) {
-                tip.style.display = 'block';
-                fullscreenButton.style.display = 'block';
-            } else {
-                tip.style.display = 'none';
-                fullscreenButton.style.display = 'none';
-            }
-        }
-
-        window.addEventListener('resize', checkOrientation);
-        checkOrientation(); // 初始化检查
-
-        // 添加全屏功能
-        document.getElementById('fullscreenButton').addEventListener('click', function () {
-            if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen().then(() => {
-                    document.body.classList.add('fullscreen');
-                });
-            } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-                document.documentElement.mozRequestFullScreen().then(() => {
-                    document.body.classList.add('fullscreen');
-                });
-            } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                document.documentElement.webkitRequestFullscreen().then(() => {
-                    document.body.classList.add('fullscreen');
-                });
-            } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-                document.documentElement.msRequestFullscreen().then(() => {
-                    document.body.classList.add('fullscreen');
-                });
-            }
-        });
     </script>
 </body>
 
