@@ -1,4 +1,4 @@
- * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -17,14 +17,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 50vh;
+            height: 50vw;
             transform: rotate(-90deg) translate(-100vw, 0);
             transform-origin: top left;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            transition: transform 0.5s ease; /* 添加过渡效果 */
+            transition: transform 0.5s ease;
+            /* 添加过渡效果 */
         }
 
         .items {
@@ -133,10 +134,43 @@
             .wrapper {
                 transform: rotate(90deg) translate(-50%, -50%);
             }
+
+            .prompt-text {
+                display: none;
+            }
         }
 
         @media (max-width: 320px) {
             .wrapper {
                 transform: rotate(90deg) translate(-50%, -50%);
             }
+
+            .prompt-text {
+                display: none;
+            }
+        }
+
+        /* 添加竖屏提示样式 */
+        .landscape-prompt {
+            border-radius: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            z-index: 1000;
+        }
+
+        /* 添加提示文字样式 */
+        .prompt-text {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 8px;
+            z-index: 1000;
+            text-align: center;
         }
