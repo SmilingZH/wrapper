@@ -18,7 +18,7 @@
             align-items: center;
             justify-content: center;
             height: 50vh;
-                                transform: rotate(-90deg) translate(-100vw, 0);
+            transform: rotate(-90deg) translate(-100vw, 0);
             transform-origin: top left;
             position: absolute;
             top: 50%;
