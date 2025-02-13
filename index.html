@@ -155,6 +155,11 @@
             cursor: pointer;
         }
 
+        .fullscreen-mode {
+            transition: transform 1s;
+            transform-origin: center center;
+        }
+
         @media (orientation: landscape) {
             .landscape-tip {
                 display: none;
@@ -218,7 +223,25 @@
             } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
                 document.documentElement.msRequestFullscreen();
             }
+
+            // 进入全屏后添加旋转功能
+            document.documentElement.addEventListener('fullscreenchange', function () {
+                if (document.fullscreenElement) {
+                    document.documentElement.classList.add('fullscreen-mode');
+                    window.addEventListener('deviceorientation', handleOrientation);
+                } else {
+                    document.documentElement.classList.remove('fullscreen-mode');
+                    window.removeEventListener('deviceorientation', handleOrientation);
+                }
+            });
         });
+
+        function handleOrientation(event) {
+            const gamma = event.gamma; // 获取gamma值
+            const rotateValue = gamma; // 使用gamma值来旋转页面
+            document.documentElement.style.transform = `rotate(${rotateValue}deg)`;
+        }
+
     </script>
 </body>
 
