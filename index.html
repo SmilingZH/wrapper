@@ -155,6 +155,32 @@
             cursor: pointer;
         }
 
+        /* 添加全屏旋转样式 */
+        body.fullscreen {
+            transform: rotate(90deg);
+            transform-origin: center;
+            width: 100vh;
+            height: 100vw;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        body.fullscreen .wrapper {
+            transform: rotate(-90deg) translate(-100vw, 0);
+            transform-origin: top left;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        body.fullscreen .landscape-tip,
+        body.fullscreen .fullscreen-button {
+            display: none;
+        }
+
         @media (orientation: landscape) {
             .landscape-tip {
                 display: none;
@@ -165,15 +191,6 @@
             .fullscreen-button {
                 display: block;
             }
-        }
-
-        .fullscreen-mode {
-            transform: rotate(90deg);
-            margin-top: -50vh;
-            margin-left: -50vw;
-            position: absolute;
-            top: 50%;
-            left: 50%;
         }
     </style>
 </head>
@@ -219,13 +236,21 @@
         // 添加全屏功能
         document.getElementById('fullscreenButton').addEventListener('click', function () {
             if (document.documentElement.requestFullscreen) {
-                document.documentElement.requestFullscreen();
+                document.documentElement.requestFullscreen().then(() => {
+                    document.body.classList.add('fullscreen');
+                });
             } else if (document.documentElement.mozRequestFullScreen) { // Firefox
-                document.documentElement.mozRequestFullScreen();
+                document.documentElement.mozRequestFullScreen().then(() => {
+                    document.body.classList.add('fullscreen');
+                });
             } else if (document.documentElement.webkitRequestFullscreen) { // Chrome, Safari and Opera
-                document.documentElement.webkitRequestFullscreen();
+                document.documentElement.webkitRequestFullscreen().then(() => {
+                    document.body.classList.add('fullscreen');
+                });
             } else if (document.documentElement.msRequestFullscreen) { // IE/Edge
-                document.documentElement.msRequestFullscreen();
+                document.documentElement.msRequestFullscreen().then(() => {
+                    document.body.classList.add('fullscreen');
+                });
             }
         });
     </script>
